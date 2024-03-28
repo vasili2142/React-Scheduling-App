@@ -1,0 +1,33 @@
+@import "../../styles/variables.scss";
+
+nav.main {
+  display: flex;
+  justify-content: center;
+  background-color: $primary-color;
+
+  a {
+    // display: block;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+    color: #fff;
+    text-decoration: none;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.4);
+    }
+
+    &.active {
+      background-color: #fff;
+      color: $primary-color;
+    }
+
+    @include breakpoint-small {
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+    }
+  }
+
+  div.dropdown-menu a{
+    color: $text-color;
+  }
+}
