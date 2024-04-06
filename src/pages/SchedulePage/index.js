@@ -1,13 +1,8 @@
 import "./styles.scss";
 import PageContainer from "../../components/PageContainer";
-import { doc, updateDoc, getDoc } from "firebase/firestore";
-import { db } from "../../database/config";
-import { auth } from "../../database/config";
+import * as database from '../../database/';
 
 export default function SchedulePage() {
-  console.log("auth", auth);
-
-  const currentUser = auth.currentUser.uid;
 
   const schedule = {
     sunday: {
@@ -42,50 +37,11 @@ export default function SchedulePage() {
     },
   };
 
-  const handleActivity = (activity, day, time) => {
-    // Retrieve user document
-    const userDocRef = doc(db, "users", currentUser);
-
-    // Fetch existing document data
-    getDoc(userDocRef)
-      .then((doc) => {
-        if (doc.exists()) {
-          // Merge existing data with new activity
-          const userData = doc.data();
-          let updatedSchedule = { ...userData.schedule };
-
-          // If the day already exists in the schedule, append the new activity to it
-          if (updatedSchedule[day]) {
-            updatedSchedule[day][time] = activity;
-          } else {
-            // If the day does not exist, create a new entry for it
-            updatedSchedule[day] = {
-              [time]: activity,
-            };
-          }
-
-          const updatedData = {
-            ...userData,
-            schedule: updatedSchedule,
-          };
-
-          // Update user document with merged data
-          updateDoc(userDocRef, updatedData)
-            .then(() => {
-              console.log("Activity added to user document successfully");
-            })
-            .catch((error) => {
-              console.error("Error adding activity to user document: ", error);
-            });
-        } else {
-          console.error("User document does not exist");
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching user document: ", error);
-      });
+  const handleActivity = async (activity, day, time) => {
+    await database.userActivitySignUp(activity, day, time);
   };
 
+  
   /**
    * Renders JSX elements for each day, and its activities, allowing users to sign up for different activities.
    *
@@ -94,7 +50,7 @@ export default function SchedulePage() {
    * @param {Object} schedule - The schedule object containing days as keys and activities as values.
    * @returns {JSX.Element[]} An array of JSX elements representing the schedule.
    */
-  const handleActivities = (schedule) => {
+  const handleRenderSchedule = (schedule) => {
     return Object.entries(schedule).map(([day, activities]) => (
       <div key={day}>
         <h2>{day.charAt(0).toUpperCase() + day.slice(1)}</h2>
@@ -117,8 +73,7 @@ export default function SchedulePage() {
 
   return (
     <PageContainer title="Schedule" className="schedule-page">
-      {handleActivities(schedule)}
-      <button>Hello World</button>
+      {handleRenderSchedule(schedule)}
     </PageContainer>
   );
 }
