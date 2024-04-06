@@ -27,7 +27,32 @@ nav.main {
     }
   }
 
-  div.dropdown-menu a{
-    color: $text-color;
+  .dropdown {
+    align-self: center;
+    button {
+      color: white;
+      
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.4);
+      }
+
+      &.active {
+        background-color: #fff;
+        color: $primary-color;
+      }
+    }
+
+    div.dropdown-menu.show {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    div.dropdown-menu a {
+      flex: auto;
+      color: $text-color;
+
+       &:hover {
+        background-color: $background-color;
+      }
+    }
   }
 }

@@ -1,0 +1,44 @@
+@import '../../styles/variables.scss';
+
+main.page {
+  .user-page {
+    aside {
+      margin-top: 3rem;
+      border: solid 1px $secondary-color;
+
+      a {
+        display: block;
+        color: $secondary-color;
+        text-decoration: none;
+        font-size: 1rem;
+        padding: 1rem;
+        border-top: solid 1px $secondary-color;
+
+        &.active {
+          background-color: $primary-color;
+          color: #fff;
+        }
+        
+        &:first-child {
+          border-top: none;
+        }
+
+        &:hover {
+          color: $success-color;
+        }
+      }
+    }
+
+    @include breakpoint-small {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+
+      aside {
+        min-width: 200px;
+        margin-left: 4rem;
+        margin-top: 0;
+      }
+    }
+  }
+}

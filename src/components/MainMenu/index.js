@@ -2,7 +2,6 @@ import './styles.scss';
 import { NavLink } from 'react-router-dom';
 
 import Dropdown from "react-bootstrap/Dropdown";
-import DropdownButton from "react-bootstrap/DropdownButton";
 
 export default function MainMenu() {
   return (
@@ -11,12 +10,14 @@ export default function MainMenu() {
       <NavLink to="/schedule">Schedule</NavLink>
       
       <Dropdown>
-        <Dropdown.Toggle variant="success" id="dropdown-basic">
+        <Dropdown.Toggle variant="none" id="dropdown-basic">
         User
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
           <NavLink to="/user">User Main</NavLink>
+          <NavLink to="/register">Register</NavLink>
+          <NavLink to="/login">Login</NavLink>
         </Dropdown.Menu>
       </Dropdown>
     </nav>

@@ -1,28 +1,64 @@
+import "./styles.scss";
+import { auth } from "../../database/config";
 import PageContainer from "../../components/PageContainer";
+import { useEffect, useState } from "react";
+import * as database from "../../database";
+import { useNavigate, NavLink, Outlet } from "react-router-dom";
 
-export default function Userpage() {
+export default function UserPage() {
+  const [currentUser, setCurrentUser] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
+
+
+  useEffect(() => {
+    (async () => {
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          setCurrentUser(user.displayName);
+        }
+        setIsLoading(false);
+      });
+    })();
+  }, []);
+
+  /**
+   * Handles the sign-out process.
+   * 
+   * Prevents the default form submission behavior and signs out the current user
+   * using the `userSignOut` method from the database module.
+   *
+   */
+  const handleSignOut = () => {
+    database.userSignOut(auth.currentUser.email);
+    navigate("/login");
+  };
+
+  // Render loading indicator while fetching data
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <PageContainer title='User Page'>
-      <p>
-        Aliquam dapibus metus odio, a iaculis magna porttitor vestibulum.
-        Maecenas velit justo, fringilla vitae mattis sed, maximus ac nulla.
-        Vivamus sed sem at elit tempus lobortis in vitae erat. Donec urna diam,
-        ullamcorper nec justo ut, molestie laoreet nunc. Sed egestas erat at
-        hendrerit dictum. Curabitur et arcu eget nunc lacinia feugiat. Fusce
-        ultrices posuere est eget commodo. Aenean fermentum molestie vestibulum.
-        In hac habitasse platea dictumst. Duis sed pretium neque. Donec laoreet
-        nisl velit, sed volutpat est accumsan congue. Praesent sit amet orci a
-        elit semper sagittis et vel sapien. Proin sit amet vestibulum orci, id
-        sollicitudin massa. In hac habitasse platea dictumst. Mauris quis urna
-        nec augue scelerisque dapibus ut ac arcu. Vestibulum bibendum accumsan
-        augue, non cursus lorem consectetur sit amet. Sed cursus placerat
-        vulputate. Donec pulvinar cursus cursus. Duis id nunc lorem. Aenean vel
-        sollicitudin magna. Quisque interdum condimentum tortor et condimentum.
-        Sed ante purus, lobortis eu orci efficitur, auctor laoreet nisi. Nullam
-        vestibulum rutrum fringilla. Cras vehicula erat erat, ut volutpat sapien
-        tempor vitae. Mauris faucibus velit vel vehicula iaculis. Cras congue ut
-        velit at pulvinar.
-      </p>
+    <PageContainer title={currentUser} className={"user-page"}>
+      {auth.currentUser ? (
+        <>
+          <article>
+            <Outlet />
+
+            <p>This is where users are redirected to on login</p>
+            <button onClick={handleSignOut}>Sign Out</button>
+          </article>
+
+          {/* Side Menu */}
+          <aside>
+            <NavLink to="/user" end>Main</NavLink>
+            <NavLink to="/user/bookings">Bookings</NavLink>
+          </aside>
+        </>
+      ) : (
+        <div>Not Logged In</div>
+      )}
     </PageContainer>
   );
 }

@@ -2,7 +2,7 @@ import PageContainer from "../../components/PageContainer";
 
 export default function HomePage() {
   return (
-    <PageContainer title="Home Page">
+    <PageContainer title="Home Page" className='home-page'>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dignissim
         urna id lacus blandit pharetra. Vestibulum at congue elit. Suspendisse
