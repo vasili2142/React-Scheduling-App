@@ -6,34 +6,38 @@ export default function SchedulePage() {
 
   const schedule = {
     sunday: {
-      "9:00 AM": "Yoga",
-      "11:00 AM": "Brunch",
-      "3:00 PM": "Gardening",
+      "11:00": "All Levels",
+      "12:00": "Tabata S&C",
+      "12:30": "Competitor Training",
     },
     monday: {
-      "10:00 AM": "Team Meeting",
-      "2:00 PM": "Coding Session",
+      "17:30": "Fundamentals",
+      "18:30": "All Levels",
+      "19:30": "Competitor Training",
     },
     tuesday: {
-      "8:00 AM": "Jogging",
-      "1:00 PM": "Lunch with Friends",
-      "6:00 PM": "Movie Night",
+      "17:00": "Youth Competitor Training",
+      "17:30": "Youth Boxing",
+      "18:30": "All Levels",
+      "19:30": "Techincal",
     },
     wednesday: {
-      "9:30 AM": "Doctor's Appointment",
-      "4:00 PM": "Grocery Shopping",
+      "17:30": "Youth Boxing",
+      "18:30": "Fundamentals",
+      "19:30": "Women's Only",
     },
     thursday: {
-      "10:00 AM": "Client Meeting",
-      "3:00 PM": "Presentation Preparation",
+      "17:00": "Youth Competitor Training",
+      "17:30": "Youth Boxing",
+      "18:30": "All Levels",
+      "19:30": "Techincal/Competitor",
     },
     friday: {
-      "12:00 PM": "Lunch",
-      "5:00 PM": "Happy Hour",
+      "17:30": "Fundamentals",
+      "18:30": "Yout Competition",
     },
     saturday: {
-      "10:00 AM": "Hiking",
-      "2:00 PM": "Picnic",
+      "All Day" : "Closed",
     },
   };
 

@@ -20,7 +20,7 @@ export default function UserPage() {
         setIsLoading(false);
       });
     })();
-  }, []);
+  }, [isLoading]);
 
   /**
    * Handles the sign-out process.

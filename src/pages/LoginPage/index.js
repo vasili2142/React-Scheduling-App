@@ -35,8 +35,12 @@ export default function LoginPage() {
    * and navigates to the user page.
    */
   // Work-a-round for not knowing how to verify, before navigating to '/user' with firestore auth error codes
-  const handleSignIn = () => {
+  const handleSignIn = (e) => {
     registeredUsers.forEach((users) => {
+      e.preventDefault();
+      if (!registeredUsers) {
+        return null;
+      }
       if (users.email === email && users.password === password) {
         database.userSignIn(email, password);
         navigate("/user");

@@ -1,6 +1,6 @@
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, doc, getDoc } from "firebase/firestore";
 import { db } from "../database/config";
-
+import { auth } from "../database/config";
 /**
  * Reads the current users from firestore and returns an array of user data.
  * @returns Array of user data from firestore
@@ -12,12 +12,29 @@ export const read = async () => {
   querySnapshot.forEach((doc) => {
     const user = {
       ...doc.data(),
-      id: doc.id,
+      // id: doc.id,
     };
     data.push(user);
   });
 
   return data;
+};
+
+export const readActivities = async () => {
+  if (!auth.currentUser) {
+    console.log("No user logged in");
+    return null; // Or handle this case as appropriate for your application
+  }
+  const docRef = doc(db, "users", auth.currentUser.uid);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+  } else {
+    // docSnap.data() will be undefined in this case
+    console.log("No such document!");
+  }
+
+  return docSnap.data();
 };
 
 export const checkLoggedIn = (user) => {
