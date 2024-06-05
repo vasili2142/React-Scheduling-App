@@ -12,7 +12,7 @@
 
 ## Technologies Used
 
-SASS
-Firebase
-React
-React Router
+- SASS
+- Firebase
+- React
+- React Router
