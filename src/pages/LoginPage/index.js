@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 // import { auth } from "../../database/config";
 import { useNavigate } from "react-router-dom";
-import { Form } from "react-bootstrap/form";
+import Form from "react-bootstrap/form";
 import PageContainer from "../../components/PageContainer";
 import * as database from "../../database";
 
