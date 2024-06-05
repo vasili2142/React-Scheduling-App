@@ -36,22 +36,9 @@
 
   ~~- The application is meant to be a booking system where the user creates a task that gets sent to the admin for approval. The admin either accepts, or rejects the request. Handling requests is not something familiar to me.~~
 
-# Possible Risks
-
-- 
-
-- Application might not have full admin implementation to handle requests as this is something I've never done
-
-- This project is also 1 of 3 finals that I need to complete. Managing time will be key to making worthwile progress.
-
 ## Technologies Used
 
-## SASS
-
-## React Bootstrap
-
-## Firebase
-
-## React
-
-## React Router
+- SASS
+- Firebase
+- React
+- React Router
