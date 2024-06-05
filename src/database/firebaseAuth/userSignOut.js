@@ -8,7 +8,6 @@ export const userSignOut = (currentUser) => {
       console.log(`${currentUser} logged out successfully`);
     })
     .catch((error) => {
-      // An error happened.
       console.log('Error:', error);
     });
 };

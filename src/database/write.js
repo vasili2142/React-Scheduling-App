@@ -9,7 +9,7 @@ import { auth } from "../database/config";
  * @param {string} activity - The activity to sign up for.
  * @param {string} day - The day of the week for the activity.
  * @param {string} time - The time slot for the activity.
- * @returns {Promise<Object|undefined>} The updated user data with the new activity added, or undefined if an error occurs.
+ * @returns {Promise<Object>} The updated user data with the new activity added.
  */
 export const userActivitySignUp = async (activity, day, time) => {
   const userDocRef = doc(db, "users", auth.currentUser.uid);
@@ -18,9 +18,9 @@ export const userActivitySignUp = async (activity, day, time) => {
     const docSnap = await getDoc(userDocRef);
     if (docSnap.exists()) {
       const userData = docSnap.data();
+      const updatedSchedule = { ...userData.schedule };
 
-      let updatedSchedule = { ...userData.schedule };
-
+      // Check if a day of the week is being stored
       updatedSchedule[day]
         ? (updatedSchedule[day][time] = activity)
         : (updatedSchedule[day] = { [time]: activity });
@@ -35,6 +35,7 @@ export const userActivitySignUp = async (activity, day, time) => {
     }
   } catch (error) {
     console.error("Error: ", error);
+    return false;
   }
 };
 
@@ -48,7 +49,7 @@ export const handleUpdateActivities = async (updatedData) => {
   const userDocRef = doc(db, "users", auth.currentUser.uid);
   updateDoc(userDocRef, updatedData)
     .then(() => {
-      console.log("Activity added to user document successfully");
+      // console.log("Activity added to user document successfully");
     })
     .catch((error) => {
       console.error("Error adding activity to user document: ", error);

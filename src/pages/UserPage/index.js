@@ -9,7 +9,7 @@ export default function UserPage() {
   const [currentUser, setCurrentUser] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
-
+  const [refreshCounter, setRefreshCounter] = useState(0);
 
   useEffect(() => {
     (async () => {
@@ -20,11 +20,11 @@ export default function UserPage() {
         setIsLoading(false);
       });
     })();
-  }, [isLoading]);
-
+  }, []);
+  
   /**
    * Handles the sign-out process.
-   * 
+   *
    * Prevents the default form submission behavior and signs out the current user
    * using the `userSignOut` method from the database module.
    *
@@ -34,7 +34,7 @@ export default function UserPage() {
     navigate("/login");
   };
 
-  // Render loading indicator while fetching data
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -52,7 +52,9 @@ export default function UserPage() {
 
           {/* Side Menu */}
           <aside>
-            <NavLink to="/user" end>Main</NavLink>
+            <NavLink to="/user" end>
+              Main
+            </NavLink>
             <NavLink to="/user/bookings">Bookings</NavLink>
           </aside>
         </>

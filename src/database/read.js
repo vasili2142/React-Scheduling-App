@@ -23,7 +23,7 @@ export const read = async () => {
 export const readActivities = async () => {
   if (!auth.currentUser) {
     console.log("No user logged in");
-    return null; // Or handle this case as appropriate for your application
+    return false;
   }
   const docRef = doc(db, "users", auth.currentUser.uid);
   const docSnap = await getDoc(docRef);

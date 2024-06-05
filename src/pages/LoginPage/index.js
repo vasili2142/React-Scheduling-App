@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { auth } from "../../database/config";
+// import { auth } from "../../database/config";
 import { useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/form";
 import PageContainer from "../../components/PageContainer";
@@ -24,9 +24,9 @@ export default function LoginPage() {
    * Utilizes the `checkLoggedIn` method from the database module,
    * passing the current user from the auth module.
    */
-  const handleCheckUser = () => {
-    database.checkLoggedIn(auth.currentUser);
-  };
+  // const handleCheckUser = () => {
+  //   database.checkLoggedIn(auth.currentUser);
+  // };
 
   /**
    * Handles the sign-in process.
@@ -74,7 +74,7 @@ export default function LoginPage() {
         <button>Sign In</button>
         
       </Form>
-      <button onClick={handleCheckUser}>Check Logged in</button>
+      {/* <button onClick={handleCheckUser}>Check Logged in</button> */}
     </PageContainer>
   );
 }
